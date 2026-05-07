@@ -1,0 +1,124 @@
+{
+  "name": "LIDeSIA - Chatbot diplomatura",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {
+          "inputPlaceholder": "Escribí tu consulta...",
+          "subtitle": "Consultas sobre la diplomatura en IA aplicada",
+          "title": "Asistente LIDeSIA",
+          "responseMode": "lastNode"
+        }
+      },
+      "id": "9d60dc9b-f472-4878-aaea-721519efae0a",
+      "name": "Chat de la diplomatura",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [-2416, 416],
+      "webhookId": "lidesia-diplomatura-chat-n8n"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput || $json.message || ($json.body && $json.body.message) || ($json.body && $json.body.text) || '' }}",
+        "options": {
+          "systemMessage": "Sos el asistente de orientación de LIDeSIA para la Diplomatura en Ingeniería de Soluciones basadas en Inteligencia Artificial.\n\nRespondé en español claro, amable, breve y accesible. No asumas perfil técnico. Usá únicamente la documentación provista. No inventes aranceles, fechas, modalidades, requisitos ni condiciones. Si falta un dato, decilo y ofrecé derivar a una persona.\n\nSi la persona quiere hablar con alguien, pedir entrevista, que la contacten, consultar pagos específicos o resolver una duda personal: si faltan nombre o email, pedilos. Si ya tenés nombre, email y motivo, respondé normalmente y usá la tool de telegram para avisar.\n\nDOCUMENTACIÓN OFICIAL:\nNombre: Diplomatura en Ingeniería de Soluciones basadas en Inteligencia Artificial.\nResumen: Propuesta de formación continua para comprender, diseñar e integrar soluciones basadas en IA desde un enfoque integral, multidisciplinario y centrado en las personas.\nDuración: 100 horas.\nModalidad: virtual sincrónica.\nFechas: inicia el 20/04/2026 y finaliza el 20/11/2026.\nCursado: jueves de 18:00 a 20:30.\nEstado: preinscripción abierta.\nPúblico destinatario: profesionales, docentes, técnicos y personas interesadas en IA aplicada. No está pensada solo para perfiles técnicos.\nEjes: fundamentos; modelos y técnicas; IA generativa y agentes; gobernanza e integración. Incluye probabilidad y estadística, matemática aplicada, fundamentos de programación, tratamiento de datos, aprendizaje automático, redes neuronales, transformers, transfer learning, visión artificial, procesamiento de lenguaje natural, fine-tuning con LLM, RAG, Make, Zapier Central, n8n, CrewAI, LangChain, AutoGen, AutoGPT, gestión de proyectos basados en IA, ISO 42001, gestión del riesgo y del cambio, ciberseguridad, ética, regulaciones, impacto e integración de soluciones.\nAdmisión: contempla formación previa, ocupación actual, interés y motivación. Incluye preinscripción, revisión de antecedentes y entrevista breve a cargo del equipo directivo.\nEvaluación: trabajo integrador en equipos multidisciplinarios sobre un problema real.\nCertificación: pertenece al programa de Formación Continua de la FCEFyN-UNC.\nPago y bonificaciones: la convocatoria oficial informa promoción por pago al contado, bonificaciones para convenios y facilidades de financiación. No hay montos exactos confirmados en esta documentación.\nPreinscripción: https://forms.gle/QEjm4DcDJjM8eFji9\nPrograma: https://fcefyn.unc.edu.ar/facultad/secretarias/extension/area-de-formacion-continua/ingenieria-de-soluciones-basadas-en-inteligencia-artificial/"
+        }
+      },
+      "id": "4d67a967-94fa-4416-97fe-72628f25da7f",
+      "name": "Agente LIDeSIA",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [-2048, 496]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId || ($json.body && $json.body.sessionId) || $json.chatId || ($json.body && $json.body.message) || $json.chatInput || 'local-session' }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [-2000, 800],
+      "id": "776feb20-ec1a-4a6e-9b47-e1d2df103442",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "1eb3f771-4a02-48a1-92af-a13ef593fd58",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [-2416, 624],
+      "id": "d842710f-0b8e-4c1a-a2b5-8ee318c4a7b5",
+      "name": "Webhook",
+      "webhookId": "1eb3f771-4a02-48a1-92af-a13ef593fd58"
+    },
+    {
+      "parameters": {
+        "chatId": "=647184522",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', ``, 'string') }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegramTool",
+      "typeVersion": 1.2,
+      "position": [-1744, 704],
+      "id": "58c0876f-54f2-457c-8c91-57f60ba9efe6",
+      "name": "avisar por telegram",
+      "webhookId": "18350b89-7db3-4ce3-9dc6-db7c3d9d2ab5",
+      "notesInFlow": true,
+      "notes": "Usar esta herramienta para enviar mensajes por Telegram y avisar que una persona (dar datos) quiere comunicarse con el LIDESIA. Usalo siempre que alguien quiera comunicarse con nosotros o con una persona.\n"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [-2192, 704],
+      "id": "26e63719-fe5f-4617-a739-802256f071e2",
+      "name": "OpenAI Chat Model"
+    }
+  ],
+  "connections": {
+    "Chat de la diplomatura": {
+      "main": [[{"node": "Agente LIDeSIA", "type": "main", "index": 0}]]
+    },
+    "Agente LIDeSIA": {
+      "main": [[]]
+    },
+    "Simple Memory": {
+      "ai_memory": [[{"node": "Agente LIDeSIA", "type": "ai_memory", "index": 0}]]
+    },
+    "Webhook": {
+      "main": [[{"node": "Agente LIDeSIA", "type": "main", "index": 0}]]
+    },
+    "avisar por telegram": {
+      "ai_tool": [[{"node": "Agente LIDeSIA", "type": "ai_tool", "index": 0}]]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [[{"node": "Agente LIDeSIA", "type": "ai_languageModel", "index": 0}]]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c295224bcb48d242741e4e893513c8bf2f2c983c00db0a6f77e2490ec0ee92ce"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}

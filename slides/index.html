@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Diapositivas introductorias para entender n8n y construir un chatbot LIDeSIA." />
+    <title>Clase LIDeSIA: n8n y chatbot</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="deckChrome" aria-label="Controles de presentación">
+      <a class="skipLink" href="#current-slide">Saltar al contenido</a>
+      <div class="deckBrand">LIDeSIA · n8n desde cero</div>
+      <div class="deckControls">
+        <button type="button" id="prevSlide" aria-label="Diapositiva anterior">Anterior</button>
+        <span id="slideCounter" aria-live="polite">1 / 20</span>
+        <button type="button" id="nextSlide" aria-label="Diapositiva siguiente">Siguiente</button>
+      </div>
+    </header>
+
+    <main class="deck" id="current-slide" tabindex="-1">
+      <section class="slide titleSlide active" data-title="Portada">
+        <div class="kicker" data-animate>Clase práctica · antes del chatbot</div>
+        <h1 data-animate>n8n: automatizar con piezas visibles</h1>
+        <p class="lead" data-animate>Primero entendemos la idea: qué problema resuelve n8n, cuándo conviene usarlo y por qué se parece a armar un circuito con componentes.</p>
+        <div class="titleMeta" data-animate>
+          <span>Automatización</span>
+          <span>Componentes</span>
+          <span>IA</span>
+          <span>Chatbot</span>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Qué es n8n">
+        <div>
+          <p class="kicker" data-animate>Idea base</p>
+          <h2 data-animate>n8n conecta pasos</h2>
+          <p data-animate>Un paso recibe información, hace algo y se la pasa al siguiente. En vez de escribir todo el programa, armamos un flujo con bloques.</p>
+        </div>
+        <div class="miniFlow" aria-label="Flujo simple de n8n" data-animate>
+          <div>Algo pasa</div>
+          <span>→</span>
+          <div>n8n decide</div>
+          <span>→</span>
+          <div>Sale una acción</div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Ejemplos simples">
+        <p class="kicker" data-animate>Ejemplos cotidianos</p>
+        <h2 data-animate>Automatizaciones simples</h2>
+        <div class="exampleGrid">
+          <article data-animate><strong>Formulario</strong><p>Alguien completa un formulario y llega un aviso por mail.</p></article>
+          <article data-animate><strong>Planilla</strong><p>Se agrega una fila y n8n manda un mensaje a Telegram.</p></article>
+          <article data-animate><strong>Agenda</strong><p>Se reserva una entrevista y se crea un recordatorio.</p></article>
+          <article data-animate><strong>Chatbot</strong><p>Una persona pregunta y el flujo decide si responde o deriva.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Formas de resolver">
+        <p class="kicker" data-animate>No todo se resuelve igual</p>
+        <h2 data-animate>Distintas formas de resolver un problema</h2>
+        <div class="choiceTable" data-animate>
+          <div><strong>Manual</strong><span>Bueno para empezar, malo cuando se repite mucho.</span></div>
+          <div><strong>Python</strong><span>Muy flexible, pero hay que programar y mantener el código.</span></div>
+          <div><strong>n8n</strong><span>Rápido para conectar servicios y ver el flujo completo.</span></div>
+          <div><strong>Python + IA</strong><span>Útil cuando hay lógica especial, texto o datos complejos.</span></div>
+          <div><strong>n8n + código</strong><span>Buena mezcla: flujo visible con pequeñas partes programadas.</span></div>
+          <div><strong>Herramienta lista</strong><span>A veces lo mejor es usar algo que ya existe.</span></div>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Comparación">
+        <div>
+          <p class="kicker" data-animate>Cuándo elegir qué</p>
+          <h2 data-animate>La pregunta no es “qué está de moda”</h2>
+          <p data-animate>La pregunta es: cuánto control necesito, cuánto tiempo tengo y quién va a mantenerlo después.</p>
+        </div>
+        <div class="balanceBoard" data-animate>
+          <div><span>Más rápido</span><strong>n8n</strong></div>
+          <div><span>Más control fino</span><strong>Python</strong></div>
+          <div><span>Mejor para probar ideas</span><strong>n8n + IA</strong></div>
+          <div><span>Mejor para producto grande</span><strong>Aplicación propia</strong></div>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Simulador">
+        <div>
+          <p class="kicker" data-animate>Analogía</p>
+          <h2 data-animate>Como un simulador de electrónica</h2>
+          <p data-animate>En electrónica llevamos el problema a componentes: fuente, sensor, resistencia, compuerta, salida. En n8n hacemos algo parecido: entrada, decisión, transformación y acción.</p>
+        </div>
+        <div class="circuitBoard" aria-label="Analogía con circuito" data-animate>
+          <div class="chip">Entrada</div>
+          <span class="wire"></span>
+          <div class="chip">Decisión</div>
+          <span class="wire"></span>
+          <div class="chip">Acción</div>
+          <span class="wire vertical"></span>
+          <div class="chip accentChip">Resultado</div>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Componentes">
+        <div>
+          <p class="kicker" data-animate>Programar con bloques</p>
+          <h2 data-animate>Un flujo también es un programa</h2>
+          <p data-animate>No escribimos tantas líneas, pero sí decidimos el orden, las condiciones, los datos que entran y lo que sale.</p>
+        </div>
+        <div class="componentList" data-animate>
+          <div><strong>Disparador</strong><span>¿Qué inicia el flujo?</span></div>
+          <div><strong>Transformación</strong><span>¿Qué cambiamos de los datos?</span></div>
+          <div><strong>Decisión</strong><span>¿Qué camino sigue?</span></div>
+          <div><strong>Acción</strong><span>¿Qué hacemos al final?</span></div>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Vibecoding">
+        <div>
+          <p class="kicker" data-animate>IA y control</p>
+          <h2 data-animate>Vibecoding puede ser una caja negra</h2>
+          <p data-animate>Cuando pedimos “haceme un programa”, puede funcionar, pero muchas veces no sabemos qué quedó adentro ni dónde tocar si falla.</p>
+        </div>
+        <div class="blackBoxDemo" data-animate>
+          <div class="blackBox">“Haceme una app”</div>
+          <span>→</span>
+          <div class="mysteryBox">¿Qué hay adentro?</div>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Control">
+        <div>
+          <p class="kicker" data-animate>La ventaja de n8n</p>
+          <h2 data-animate>Con n8n vemos el camino</h2>
+          <p data-animate>El flujo queda dibujado. Podemos abrir cada bloque, ver qué recibió, qué respondió y dónde se rompió.</p>
+        </div>
+        <div class="visibleFlow" data-animate>
+          <div>Mensaje</div>
+          <span>→</span>
+          <div>Agente</div>
+          <span>→</span>
+          <div>Respuesta</div>
+          <span>↘</span>
+          <div>Telegram</div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Mi entorno">
+        <p class="kicker" data-animate>Cómo lo tengo yo</p>
+        <h2 data-animate>Mi n8n vive en un servidor</h2>
+        <div class="setupMap publicMap" aria-label="Entorno público del docente">
+          <div data-animate><strong>Servidor</strong><span>Computadora prendida en internet.</span></div>
+          <div class="mapArrow" data-animate>→</div>
+          <div data-animate><strong>Dominio</strong><span>Una dirección pública, por ejemplo n8n.mnsosa.com.</span></div>
+          <div class="mapArrow" data-animate>→</div>
+          <div data-animate><strong>Web aparte</strong><span>La página puede estar en otro servidor y llamar a n8n.</span></div>
+        </div>
+        <p class="underText" data-animate>Esto sirve para algo real y público, pero no es ideal para una primera clase: todos dependerían de mi servidor.</p>
+      </section>
+
+      <section class="slide" data-title="Entorno local">
+        <p class="kicker" data-animate>Cómo lo van a tener ustedes</p>
+        <h2 data-animate>Hoy todo queda en cada computadora</h2>
+        <div class="setupMap localMap" aria-label="Entorno local de estudiantes">
+          <div data-animate><strong>Tu computadora</strong><span>Corre n8n local.</span></div>
+          <div class="mapArrow" data-animate>→</div>
+          <div data-animate><strong>Tu navegador</strong><span>Abre n8n y la web de prueba.</span></div>
+          <div class="mapArrow" data-animate>→</div>
+          <div data-animate><strong>Tu flujo</strong><span>Podés romper, probar y volver a empezar.</span></div>
+        </div>
+        <p class="underText" data-animate>No necesitamos publicar nada en internet para aprender el concepto.</p>
+      </section>
+
+      <section class="slide" data-title="Objetivo clase">
+        <p class="kicker" data-animate>Ahora sí: el ejercicio</p>
+        <h2 data-animate>Vamos a construir un chatbot</h2>
+        <div class="outcomeGrid">
+          <div data-animate><span>1</span><strong>Recibe preguntas</strong><p>Desde una web simple o desde el chat interno de n8n.</p></div>
+          <div data-animate><span>2</span><strong>Usa información oficial</strong><p>Responde sobre la diplomatura sin inventar datos.</p></div>
+          <div data-animate><span>3</span><strong>Recuerda la charla</strong><p>Mantiene una sesión mientras conversamos.</p></div>
+          <div data-animate><span>4</span><strong>Avisa por Telegram</strong><p>Cuando alguien quiere contacto humano.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Arquitectura ejercicio">
+        <p class="kicker" data-animate>Mapa del chatbot</p>
+        <h2 data-animate>Qué piezas vamos a unir</h2>
+        <div class="visualSplit visualSplitWide">
+          <div class="flowDiagram" aria-label="Arquitectura web n8n agente telegram">
+            <div class="flowNode web" data-animate>Web de prueba<br /><small>la ve el usuario</small></div>
+            <div class="flowArrow" data-animate>→</div>
+            <div class="flowNode webhook" data-animate>Entrada en n8n<br /><small>recibe la pregunta</small></div>
+            <div class="flowArrow" data-animate>→</div>
+            <div class="flowNode agent" data-animate>Agente<br /><small>piensa la respuesta</small></div>
+            <div class="flowBranch">
+              <div class="flowNode model" data-animate>Modelo de IA</div>
+              <div class="flowNode memory" data-animate>Memoria</div>
+              <div class="flowNode telegram" data-animate>Telegram</div>
+            </div>
+          </div>
+          <figure class="screenshotFrame workflowShot" data-animate>
+            <img src="assets/agente_workflow_n8n.png" alt="Workflow de n8n con el agente LIDeSIA, entrada web, modelo de IA, memoria y Telegram." />
+            <figcaption>Vista real del flujo que vamos a importar.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide terminalSlide" data-title="Instalar">
+        <p class="kicker" data-animate>Primer paso práctico</p>
+        <h2 data-animate>Levantar n8n local</h2>
+        <pre data-animate><code>cd n8n-workshops
+docker compose up -d
+
+# abrir en el navegador
+http://localhost:5678</code></pre>
+        <div class="noteGrid">
+          <p data-animate>Docker nos permite usar n8n sin instalarlo a mano.</p>
+          <p data-animate>Si algo sale mal, podemos apagarlo y volver a levantarlo.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Workflow">
+        <p class="kicker" data-animate>Segundo paso práctico</p>
+        <h2 data-animate>Importar el flujo base</h2>
+        <div class="visualSplit">
+          <div>
+            <div class="nodeBoard" aria-label="Nodos principales del workflow">
+              <div class="nodeCard trigger" data-animate>Chat interno</div>
+              <div class="nodeCard webhook" data-animate>Entrada web</div>
+              <div class="nodeCard agent" data-animate>Agente LIDeSIA</div>
+              <div class="nodeCard model" data-animate>Modelo de IA</div>
+              <div class="nodeCard memory" data-animate>Memoria</div>
+              <div class="nodeCard telegram" data-animate>Telegram</div>
+            </div>
+            <p class="underText" data-animate>Archivo: workflows/lidesia-chatbot-diplomatura.json.</p>
+          </div>
+          <figure class="screenshotFrame importShot" data-animate>
+            <img src="assets/captura_copiar_json_a_workflow_n8n.png" alt="Pantalla de n8n mostrando cómo copiar o importar el JSON del workflow." />
+            <figcaption>Copiamos el JSON del ejercicio y lo pegamos en un workflow nuevo.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Reglas del asistente">
+        <div>
+          <p class="kicker" data-animate>Diseño del comportamiento</p>
+          <h2 data-animate>El bot no debe inventar</h2>
+          <p data-animate>La IA escribe, pero nosotros ponemos reglas. El asistente usa la información oficial de la diplomatura y reconoce cuando falta un dato.</p>
+        </div>
+        <div class="promptPanel" data-animate>
+          <span>Reglas simples</span>
+          <ul>
+            <li>Responder claro y corto.</li>
+            <li>No asumir que la persona sabe programar.</li>
+            <li>No inventar precios ni requisitos.</li>
+            <li>Derivar cuando haga falta una persona.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Telegram">
+        <div>
+          <p class="kicker" data-animate>Contacto humano</p>
+          <h2 data-animate>Telegram es la salida de emergencia</h2>
+          <p data-animate>Si alguien pide hablar con LIDeSIA, el agente puede avisar por Telegram. Antes tiene que pedir datos mínimos: nombre, mail y motivo.</p>
+        </div>
+        <div class="telegramVisual">
+          <div class="decisionDiagram" aria-label="Decisión de derivación" data-animate>
+            <div>¿Quiere hablar con alguien?</div>
+            <span>Sí</span>
+            <div>¿Tenemos nombre y mail?</div>
+            <span>Sí</span>
+            <div>Mandar aviso</div>
+          </div>
+          <figure class="screenshotFrame telegramShot" data-animate>
+            <img src="assets/captura_mensaje_telegram_respuesta.png" alt="Mensaje de Telegram generado por el chatbot cuando una persona pide contacto humano." />
+            <figcaption>El flujo avisa por Telegram cuando hay que derivar.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Pruebas">
+        <p class="kicker" data-animate>Probar con intención</p>
+        <h2 data-animate>Preguntas para probar</h2>
+        <div class="testGrid">
+          <article data-animate><strong>Dato simple</strong><p>¿Cuándo empieza y cuánto dura?</p></article>
+          <article data-animate><strong>Perfil abierto</strong><p>Soy docente y no programo, ¿me sirve?</p></article>
+          <article data-animate><strong>Límite</strong><p>¿Cuánto sale exactamente?</p></article>
+          <article data-animate><strong>Derivación</strong><p>Soy Ana, mi mail es ana@example.com y quiero hablar con alguien.</p></article>
+        </div>
+      </section>
+
+      <section class="slide splitSlide" data-title="Criterio">
+        <div>
+          <p class="kicker" data-animate>Lo más importante</p>
+          <h2 data-animate>Automatizar no es desentenderse</h2>
+          <p data-animate>El flujo ayuda, pero seguimos siendo responsables de qué responde, a quién deriva y qué datos maneja.</p>
+        </div>
+        <div class="riskList" data-animate>
+          <div><strong>Claridad</strong><span>Que la persona entienda la respuesta.</span></div>
+          <div><strong>Límites</strong><span>Que el bot diga “no lo sé” cuando corresponde.</span></div>
+          <div><strong>Control</strong><span>Que podamos revisar cada paso del flujo.</span></div>
+        </div>
+      </section>
+
+      <section class="slide closeSlide" data-title="Cierre">
+        <p class="kicker" data-animate>Cierre</p>
+        <h2 data-animate>n8n como puente</h2>
+        <p class="lead" data-animate>n8n no reemplaza aprender a pensar un sistema. Nos da una forma rápida y visible de pasar de una idea a un flujo funcionando.</p>
+        <div class="nextSteps" data-animate>
+          <span>Entender el problema</span>
+          <span>Elegir la herramienta</span>
+          <span>Armar componentes</span>
+          <span>Probar límites</span>
+        </div>
+      </section>
+    </main>
+
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+    <script src="slides.js"></script>
+  </body>
+</html>
