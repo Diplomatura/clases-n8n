@@ -183,6 +183,25 @@ h2 { font-size: clamp(2.7rem, 6vw, 6rem); }
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
+.repoLink {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 2rem;
+  border: 1px solid rgba(217, 255, 74, 0.45);
+  border-radius: 999px;
+  background: rgba(217, 255, 74, 0.12);
+  padding: 0.85rem 1rem;
+  color: var(--lime);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: clamp(0.9rem, 1.3vw, 1rem);
+  text-decoration: none;
+}
+
+.repoLink:hover {
+  border-color: var(--lime);
+  background: rgba(217, 255, 74, 0.18);
+}
+
 .splitSlide.active {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
